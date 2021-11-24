@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <%- include('./templates/header') %>
+</head>
+
+<body>
+    <%- include('./templates/navbar') %>
+        <div class="container-fluid" style="background-color: #eae2f6;">
+            <br>
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Agregar trabajo</h3>
+                    </div>
+                    <div class="card-body">
+    
+                        <form method="post">
+                            <div class="row m-3">
+                                <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="cargo" class="form-control" id="cargo" required>
+                                </div>
+                            </div>
+                            <div class="row m-3">
+                                <div class="col-sm-6">
+                                    <label for="name" class="form-label">Nombre de la Empresa</label>
+                                    <input type="text" name="name" id="name" class="form-control"
+                                        pattern="[a-zA-z\s]+" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="salary" class="form-label">Salario</label>
+                                    <input type="number" name="salary" id="salary" class="form-control" required>
+                                </div>
+                            </div>
+                            
+                            <fieldset class="row m-3">
+                                <legend class="col-form-label col-md-2 pt-0">Genero del trabajador:</legend>
+                                <div class="col-md-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" value="F" checked>
+                                        <label class="form-check-label" for="gender">
+                                            Femenino
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" value="M">
+                                        <label class="form-check-label" for="gender">
+                                            Masculino
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" value="N">
+                                        <label class="form-check-label" for="gender">
+                                            No importa
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <br>
+                            <div class="row">
+                                <h5>Ubicación del trabajo</h5>
+                            </div>
+    
+                            <div class="row m-3">
+                                <div class="col-sm-6">
+                                    <label for="dpto" class="form-label">Departamento</label>
+                                    <select id="dpto" class="form-select" name="dpto" required>
+                                        <option value="">Seleccione Departamento</option>
+                                        <%departments.forEach(dpto=> { %>
+                                            <option value="<%= dpto.code%>">
+                                                <%= dpto.name%>
+                                            </option>
+                                            <%})%>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="towns" class="form-label">Municipio</label>
+                                    <select id="towns" name="town" class="form-select">
+    
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <h5>Datos de contacto de la empresa</h5>
+                            </div>
+                            <div class="row m-3">
+                                <div class="col-sm-6">
+                                    <label for="email" class="form-label">Correo</label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" >
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="phone" class="form-label">Teléfono</label>
+                                    <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]+"
+                                        >
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <h5>Requisitos o comentarios</h5>
+                            </div>
+                            <div class="m-3"> 
+                                
+                                <textarea class="form-control" rows="5" id="comments" name="comments" required></textarea>
+                              </div> 
+                            
+                            <div class="row mt-3">
+                                <button type="submit" class="btn btn-primary">Enviar Datos</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+
+            <br>
+            <br>
+            <br>
+        </div>
+
+
+        <script>
+            var dataTowns = <%- JSON.stringify(towns) %>
+            var dataDptos =  <%-JSON.stringify(departments)%>
+
+        </script>
+        <%- include('./templates/footer') %>
+</body>
+
+</html>
