@@ -2,7 +2,7 @@ const express= require('express');
 const router = express.Router();
 
 const colombia = require('./../resources/files/colombia');
-
+let num=0;
 let students = []
 
 router.get('/',(req,res)=>{
@@ -22,10 +22,21 @@ router.post('/insert',(req,res)=>{
     const city = townAux.concat( '-', dptoAux );
     const genAux = gender == 'F' ? "Femenino" : gender == 'M' ? "Masculino": "No importa";
     let candidates=[];
-    let newReg = {cargo, name, salary, genAux, city, email, phone, comments, candidates };
+    num++;
+    let newReg = {num,cargo, name, salary, genAux, city, email, phone, comments, candidates };
     students.push(newReg);
     res.redirect('/');
 });
+
+router.get('/deleteWork/:num', (req, res) => {
+    const num = req.params.num;
+    students = students.filter(function(work) {
+        return work.num != num; 
+    });
+    res.redirect('/');
+    
+});
+
 
 
 // INSERTAR PERSONA A UN TRABAJO

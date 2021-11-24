@@ -52,6 +52,7 @@
         <div class="table-responsive">
           <table class="table bm-2 align-middle table-hover table-striped text-center ">
             <thead style="color: rgb(255, 255, 255); background-color: #3d378f;">
+              <th>#num</th>
               <th>Cargo</th>
               <th>Empresa</th>
               <th>Salario</th>
@@ -65,6 +66,9 @@
             <tbody>
               <% students.forEach(student=> { %>
                 <tr>
+                  <td>
+                    <%= student.num %>
+                  </td>
                   <td>
                     <%= student.cargo %>
                   </td>
@@ -99,7 +103,7 @@
                         </svg>
                       </a>
 
-                      <a class="btn btn-outline-danger" href="/deleteWork" role="button">
+                      <a class="btn btn-outline-danger" href="/deleteWork/<%= student.num %>" role="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                           class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                           <path
