@@ -5,16 +5,15 @@
   <%- include('./templates/header')%>
 </head>
 
-<body>
+<body data-bs-spy="scroll">
 
   <%- include('./templates/navbar')%>
 
 
   <div class="container-fluid" style="background-color: #eae2f6;">
-    <br>
     <div class="container">
       <!-- CARDS -->
-      <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="row row-cols-1 row-cols-md-2 g-4" id="Cards" style="min-height:100vh; padding-top:80px">
 
         <div class="col">
           <div class="card h-100">
@@ -25,7 +24,9 @@
                 manera contibuyes a sun insersión laoral y por tanto a un mejor futuro.</p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small class="text-muted">
+                <a class="nav-link" href="#sectionAddWork">Agregar empleo</a>
+              </small>
             </div>
           </div>
         </div>
@@ -40,16 +41,31 @@
                 tengas más oportunidades de conseguirlo) .</p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small class="text-muted">
+                <a class="nav-link" href="#sectionAddWork">Agregar empleo</a>
+              </small>
             </div>
           </div>
         </div>
       </div>
+      <div class="row justify-content-center" style="padding-top: 10px;">
+          <div class="spinner-grow " style="color: #3d378f;">
+            <span class="visually-hidden"></span>
+          </div>
+          <div class="spinner-grow text-secondary">
+            <span class="visually-hidden">Cargando</span>
+          </div>
+          <div class="spinner-grow text-success">
+            <span class="visually-hidden">Cargando</span>
+          </div>
+          <div class="spinner-grow text-danger">
+            <span class="visually-hidden">Cargando</span>
+          </div>
+        
+      </div>
 
-
-      <br>
       <%if(works.length){%>
-        <div class="table-responsive">
+        <div class="table-responsive" id="sectionAddWork" style="min-height:20vh; padding-top:70px">
           <table class="table bm-2 align-middle table-hover table-striped text-center ">
             <thead style="color: rgb(255, 255, 255); background-color: #3d378f;">
               <th>#num</th>
@@ -118,7 +134,7 @@
           </table>
         </div>
       <%}else{%>
-        <h5>No hay Registros</h5>
+        <h5>No hay trabajos disponibles</h5>
       <%}%>
 
       <a class="btn btn-success" href="/insert" role="button">Nuevo Registro</a>

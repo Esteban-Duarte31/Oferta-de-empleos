@@ -2,9 +2,79 @@ const express = require('express');
 const router = express.Router();
 
 const colombia = require('./../resources/files/colombia');
-let num = 0;
+let num = 3;
 let numWork;
-let works = []
+let works = [
+    {
+        num: 1,
+        cargo: 'DEVELOPER',
+        name: 'SAMSUNG',
+        salary: '2500000',
+        genAux: 'No importa',
+        city: 'Bogotá, D.C.-Bogotá D.C',
+        email: 'samsung@gmail.com',
+        phone: '3128932732',
+        comments: 'Estar en últimos semestres de ingeniería de sistemas',
+        candidates: [
+            {
+                idPerson: '1058239333',
+                names: 'Ana Maria Garzón Pasachoa',
+                genAux: 'Femenino',
+                city: 'Cúcuta-Norte de Santander',
+                address: 'calle 28 #20-31',
+                email: 'Ana@gmail.com',
+                phone: '3147382839',
+                professionalProfile: 'Gran trabajadora'
+            },
+            {
+                idPerson: '9364374',
+                names: 'Jimmy Alejandro Zea Gutiérrez',
+                genAux: 'Masculino',
+                city: 'Bucaramanga-Santander',
+                address: 'Carrera 21 con Calle 12a #18-23',
+                email: 'jimmy@gmail.co',
+                phone: '3227784752',
+                professionalProfile: 'Voy en 8 semestre de ing de sistemas'
+            }
+
+        ]
+    },
+    {
+        num: 2,
+        cargo: 'Desarrollador movil',
+        name: 'GOOGLE',
+        salary: '3670000',
+        genAux: 'No importa',
+        city: 'Boyacá, - Tunja',
+        email: 'samsung@gmail.com',
+        phone: '3128932732',
+        comments: 'Estar en últimos semestres de ingeniería de sistemas',
+        candidates: [
+            {
+                idPerson: '97364923',
+                names: 'Edwin Duarte Adame',
+                genAux: 'Masculino',
+                city: 'Bucaramanga-Santander',
+                address: 'Carrera 50 #04-31',
+                email: 'Edwin.duarte@gmail.co',
+                phone: '3928384478',
+                professionalProfile: 'Gran trabajador'
+            }
+        ]
+    },
+    {
+        num: 3,
+        cargo: 'Gerente de ventas',
+        name: 'JD',
+        salary: '1500000',
+        genAux: 'Femenino',
+        city: 'Sogamoso-Boyacá',
+        email: 'yessidduarte7@gmail.com',
+        phone: '3183222222',
+        comments: 'Ninguno',
+        candidates: []
+    }
+];
 
 router.get('/', (req, res) => {
     res.render("index", { works: works, title: "Página de Inicio" });
@@ -70,11 +140,23 @@ router.post('/insertPerson/:num', (req, res) => {
 
 });
 
+router.get('/deleteCandidate/:idPerson', (req, res) => {
+    const idPerson = req.params.idPerson;
+    works.forEach(element => {
+        element.candidates = element.candidates.filter(function (candidate) {
+            return candidate.idPerson != idPerson;
+        });
+    });
+    
+    res.redirect('/candidates');
+
+});
+
 
 // CANDIDATOS
 router.get('/candidates', (req, res) => {
     res.render('candidates', {
-        works: works, 
+        works: works,
         title: "Total Candidatos"
     });
 });

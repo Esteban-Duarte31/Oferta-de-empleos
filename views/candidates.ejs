@@ -9,7 +9,7 @@
     <%- include('./templates/navbar')%>
     <div class="container-fluid" style="background-color: #eae2f6;">
         <br>
-        <div class="container">
+        <div class="container" style="min-height:100vh; padding-top:60px">
             <%if(works.length){%>
                 <div class="table-responsive">
                 <table class="table bm-2 align-middle table-hover table-striped text-center ">
@@ -26,6 +26,7 @@
                         <th></th>
                     </thead>
                     <tbody>
+                     
                         <% works.forEach(work=> { %>
                             <% work.candidates.forEach(candidate=> { %>
                                 <tr>
@@ -59,14 +60,14 @@
                                     
                                     <td>
                                         <div class="d-grid gap-2 d-md-block">
-                                            <a class="btn btn-outline-success" href="/insertPerson/<%= work.num %>" role="button">
+                                            <!-- <a class="btn btn-outline-success" href="/insertPerson/<%= work.num %>" role="button">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                                     class="bi bi-node-plus-fill" viewBox="0 0 16 16">
                                                     <path
                                                         d="M11 13a5 5 0 1 0-4.975-5.5H4A1.5 1.5 0 0 0 2.5 6h-1A1.5 1.5 0 0 0 0 7.5v1A1.5 1.5 0 0 0 1.5 10h1A1.5 1.5 0 0 0 4 8.5h2.025A5 5 0 0 0 11 13zm.5-7.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2a.5.5 0 0 1 1 0z" />
                                                 </svg>
-                                            </a>
-                                            <a class="btn btn-outline-danger" href="/deleteWork/<%= work.num %>" role="button">
+                                            </a> -->
+                                            <a class="btn btn-outline-danger" href="/deleteCandidate/<%= candidate.idPerson %>" role="button">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                                     class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                                                     <path
