@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const colombia = require('./../resources/files/colombia');
+const passwordAdmin = "admin"
+let state = "disabled";
 let num = 3;
 let numWork;
 let works = [
@@ -77,12 +79,13 @@ let works = [
 ];
 
 router.get('/', (req, res) => {
-    res.render("index", { works: works, title: "Página de Inicio" });
+    res.render("index", { works: works, unlockAdmin: state, title: "Página de Inicio" });
 });
 
 router.get('/insert', (req, res) => {
     res.render('insert', {
         title: "Agregar Trabajo",
+        unlockAdmin: state,
         departments: colombia.departments,
         towns: colombia.towns
     });
@@ -117,6 +120,7 @@ router.get('/insertPerson/:num', (req, res) => {
     numWork = req.params.num;
     res.render('insertPerson', {
         title: "Agregar Persona",
+        unlockAdmin: state,
         departments: colombia.departments,
         towns: colombia.towns
     });
@@ -147,7 +151,7 @@ router.get('/deleteCandidate/:idPerson', (req, res) => {
             return candidate.idPerson != idPerson;
         });
     });
-    
+
     res.redirect('/candidates');
 
 });
@@ -157,22 +161,30 @@ router.get('/deleteCandidate/:idPerson', (req, res) => {
 router.get('/candidates', (req, res) => {
     res.render('candidates', {
         works: works,
+        unlockAdmin: state,
         title: "Total Candidatos"
     });
 });
 
-// router.post('/insert', (req, res) => {
-//     const { cargo, name, salary, gender, dpto, town, email, phone, comments } = req.body;
-//     const dptoAux = colombia.departments.find(record => record.code == dpto).name;
-//     const townAux = colombia.towns.find(record => record.code == town).name;
-//     const city = townAux.concat('-', dptoAux);
-//     const genAux = gender == 'F' ? "Femenino" : gender == 'M' ? "Masculino" : "No importa";
-//     let candidates = [];
-//     num++;
-//     let newReg = { num, cargo, name, salary, genAux, city, email, phone, comments, candidates };
-//     works.push(newReg);
-//     res.redirect('/');
-// });
+// DESBLOQUEAR OPCIONES ADMIN
+router.post('/unlockAdmin', (req, res) => {
+    // const adm=req.body;
+    // console.log(adm.lastName);
+    const pass = req.body.password;
+    if (pass == passwordAdmin) {
+        state = "enable";
+        res.render('index', {
+            works: works,
+            unlockAdmin: "enable",
+            title: "Página de Inicio"
+        });
+    } else {
+        // res.write("<div class='alert alert-danger'><strong>alert-danger </strong> Prueba de componente alert</div>");
+    }
+
+
+});
+
 
 
 
