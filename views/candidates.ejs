@@ -6,13 +6,24 @@
 </head>
 
 <body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <%- include('./templates/navbar')%>
     <div class="container-fluid" style="background-color: #eae2f6;">
         <br>
         <div class="container" style="min-height:100vh; padding-top:60px">
             <%if(works.length){%>
                 <div class="table-responsive">
-                <table class="table bm-2 align-middle table-hover table-striped text-center ">
+                <table class="table bm-2 align-middle table-hover table-striped text-center " id="tabla">
+                    <div class="container" style="background-color: #3d378f;">
+                        <div class="row" style="padding-top: 10px;">
+                         
+                          <div class="col-4 offset-lg-8">
+                            <input type="search" id="filter" class="form-control" placeholder="Buscar...">
+                          </div>
+                        </div>
+                        
+                      </div>
                     <thead style="color: rgb(255, 255, 255); background-color: #3d378f;">
                         <th>Aplico al <br>trabajo</th>
                         <th>Numero de <br>cedula</th>
@@ -90,6 +101,22 @@
 
         </div>
     </div>
+    <script>
+        // Write on keyup event of keyword input element
+        $(document).ready(function () {
+            $("#filter").keyup(function () {
+                _this = this;
+                // Show only matching TR, hide rest of them
+                $.each($("#tabla tbody tr"), function () {
+                    if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                        $(this).hide();
+    
+                    else
+                        $(this).show();
+                });
+            });
+        });
+    </script>
    
 
     <%- include('./templates/footer')%>

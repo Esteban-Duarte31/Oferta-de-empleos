@@ -175,7 +175,7 @@ router.post('/unlockAdmin', (req, res) => {
         state = "enable";
         res.render('index', {
             works: works,
-            unlockAdmin: "enable",
+            unlockAdmin: state,
             title: "Página de Inicio"
         });
     } else {
@@ -189,7 +189,7 @@ router.post('/unlockAdmin', (req, res) => {
 
 
 router.get('/about', (req, res) => {
-    res.render('about', { title: "Sobre Nosotros" });
+    res.render('about', { title: "Sobre Nosotros", unlockAdmin: state });
 });
 
 module.exports = router;
